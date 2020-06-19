@@ -13,7 +13,7 @@ voices = engine.getProperty('voices')
 #print(voices[0].id)
 engine.setProperty('voice', voices[0].id)
 
-
+# Function to wish based on the time
 def wishMe():
     hour = int(datetime.datetime.now().hour)
     if hour >=0 and hour <12:
@@ -24,10 +24,12 @@ def wishMe():
         speak("Good Evening Sir!")
     speak("I am Jarvis. Please tell me how may i help you.")
 
+# Method to make it speak any text
 def speak(audio):
     engine.say(audio)
     engine.runAndWait()
-
+ 
+# Method to listen and recognize audio, convert it into text
 def takeCommand():
     r = sr.Recognizer()
     with sr.Microphone() as source:
@@ -47,6 +49,7 @@ def takeCommand():
         return "None"
     return query
 
+# Method to send email
 def sendEmail(to, content):
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.ehlo()
@@ -59,7 +62,8 @@ if __name__ == "__main__":
     wishMe()
     while(1):
         query = takeCommand().lower()
-        #Logic for executing tasks
+        # Logic for executing tasks
+        # Simply containts if-else pairs to recognize what was said
         if 'wikipedia' in query:
             speak("Searching wikipedia")
             query = query.replace("wikipedia", "")
